@@ -8,6 +8,11 @@ variable "region" {
     default = "europe-west9"
 }
 
+variable "zone" {
+    type = string
+    default = "europe-west9-a"
+}
+
 variable "cluster" {
     type = string
     default = "hello-cluster-z"
