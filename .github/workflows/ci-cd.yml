@@ -36,14 +36,11 @@ jobs:
         export_default_credentials: true
     - run: |
         gcloud container clusters get-credentials $CLUSTER --zone $ZONE --project $PROJECT_ID
-    
-    - name: Enable Container Registry API
-      run: |
-        gcloud services enable containerregistry.googleapis.com --project ${{ env.PROJECT_ID }}
 
     - name: Configure Docker authentication for GCR
       run: |
         gcloud auth configure-docker --quiet gcr.io eu.gcr.io asia.gcr.io us.gcr.io
+        :contentReference[oaicite:0]{index=0}
 
     - name: Build & Push Docker
       run: |
