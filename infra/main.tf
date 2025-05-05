@@ -12,9 +12,9 @@ provider "google" {
 
 resource "google_container_cluster" "primary" {
     name = var.cluster
-    zone = var.zone
+    location = var.zone
     initial_node_count = 1
     node_config { 
-        machine_type = "e2-medium" 
+        machine_type = "e2-medium"
     }
 }
