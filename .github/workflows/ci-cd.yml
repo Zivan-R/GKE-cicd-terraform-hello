@@ -39,8 +39,7 @@ jobs:
 
     - name: Configure Docker authentication for GCR
       run: |
-        gcloud auth configure-docker --quiet gcr.io eu.gcr.io asia.gcr.io us.gcr.io
-        :contentReference[oaicite:0]{index=0}
+        gcloud auth configure-docker --quiet
 
     - name: Build & Push Docker
       run: |
