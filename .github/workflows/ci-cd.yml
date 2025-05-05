@@ -41,7 +41,7 @@ jobs:
       - name: Get GKE Creds
         run: |
           gcloud container clusters get-credentials \
-          $CLUSTER --zone $ZONE --project PROJECT_ID
+          $CLUSTER --zone $ZONE --project projet-z1
 
       - name: Configure Docker for Artifact Registry
         run: |
