@@ -1,25 +1,27 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: GKE-cicd-terraform-hello
+  name: gke-cicd-terraform-hello
 spec:
   replicas: 1
   selector:
-    matchLabels: { app: hello }
+    matchLabels:
+      app: hello
   template:
     metadata:
-      labels: { app: hello }
+      labels:
+        app: hello
     spec:
       containers:
       - name: nginx
-        image: gcr.io/projet-z1/gke-cicd-terraform-hello:${GITHUB_SHA}
+        image: europe-west9-docker.pkg.dev/projet-z1/hello-repo-z/gke-cicd-terraform-hello:${GITHUB_SHA}
         ports: [{ containerPort: 80 }]
 
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: GKE-cicd-terraform-hello-svc
+  name: gke-cicd-terraform-hello-svc
 spec:
   type: LoadBalancer
   selector:

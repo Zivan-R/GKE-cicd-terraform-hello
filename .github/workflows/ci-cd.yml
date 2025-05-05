@@ -53,9 +53,12 @@ jobs:
         run: |
           IMAGE_HOST=${REGION}-docker.pkg.dev
           IMAGE_PATH=$IMAGE_HOST/${PROJECT_ID}/${REPO}/gke-cicd-terraform-hello:${GITHUB_SHA}
-          kubectl set image deployment/gke-cicd-terraform-hello \
-            nginx=$IMAGE_PATH
+          docker build -t $IMAGE_PATH
+          docker push $IMAGE_PATH
+          # kubectl set image deployment/gke-cicd-terraform-hello \
+          #   nginx=$IMAGE_PATH
       
       - name: Deploy to GKE
         run: |
           envsubst < k8s.yaml | kubectl apply -f -
+          kubectl rollout status deployment/gke-cicd-terraform-hello --timeout=120s
