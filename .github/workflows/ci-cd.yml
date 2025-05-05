@@ -37,6 +37,9 @@ jobs:
         with:
           project_id: ${{ env.PROJECT_ID }}
           export_default_credentials: true
+          install_components: |
+            kubectl
+            gke-gcloud-auth-plugin
 
       - name: Get GKE Creds
         run: |
