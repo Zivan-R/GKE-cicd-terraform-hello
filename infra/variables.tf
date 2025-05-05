@@ -1,14 +1,14 @@
 variable "project_id" {
-    type = string,
+    type = string
     default = "projet-z1"
 }
 
 variable "region" {
-    type = string,
+    type = string
     default = "europe-west9"
 }
 
 variable "cluster" {
-    type = string,
+    type = string
     default = "hello-cluster-z"
 }
