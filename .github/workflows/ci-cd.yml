@@ -37,6 +37,14 @@ jobs:
     - run: |
         gcloud container clusters get-credentials $CLUSTER --zone $ZONE --project $PROJECT_ID
     
+    - name: Enable Container Registry API
+      run: |
+        gcloud services enable containerregistry.googleapis.com --project ${{ env.PROJECT_ID }}
+
+    - name: Configure Docker authentication for GCR
+      run: |
+        gcloud auth configure-docker --quiet
+
     - name: Build & Push Docker
       run: |
         docker build -t gcr.io/projet-z1/gke-cicd-terraform-hello:${{ github.sha }} .
