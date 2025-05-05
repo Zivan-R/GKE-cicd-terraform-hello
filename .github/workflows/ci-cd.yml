@@ -1,0 +1,44 @@
+name: CI/CD Hello
+
+on: [ push ]
+
+env:
+  PROJECT_ID: projet-z1
+  REGION: europe-west9
+  CLUSTER: hello-cluster-z
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v2
+
+    - name: Terraform Apply
+      env:
+        GOOGLE_CREDENTIALS: ${{ secrets.GCP_SA_KEY }}
+      run: |
+        cd infra
+        terraform init
+        terraform apply -auto-approve
+      
+    - name: Auth & Get GKE creds
+      uses: google-github-actions/auto@v1
+      with:
+        credentials_json: ${{ secrets.GCP_SA_KEY }}
+    - uses: google-github-actions/setup-cloud@v1
+      with:
+        project_id: ${{ env.PROJECT_ID }}
+    - run: |
+        gcloud container clusters get-credentials $CLUSTER --region $REGION
+    
+    - name: Build & Push Docker
+      run: |
+        docker build -t gcr.io/projet-z1/GKE-cicd-terraform-hello:${{ github.sha }} .
+        docker push gcr.io/projet-z1/GKE-cicd-terraform-hello:${{ github.sha }}
+    
+    - name: Deploy to GKE
+      run: |
+        envsubst < k8s.yaml | kubectl apply -f -
