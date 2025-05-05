@@ -43,7 +43,7 @@ jobs:
 
     - name: Configure Docker authentication for GCR
       run: |
-        gcloud auth configure-docker --quiet
+        gcloud auth configure-docker --quiet gcr.io eu.gcr.io asia.gcr.io us.gcr.io
 
     - name: Build & Push Docker
       run: |
