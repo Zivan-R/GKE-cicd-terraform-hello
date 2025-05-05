@@ -39,8 +39,8 @@ jobs:
     
     - name: Build & Push Docker
       run: |
-        docker build -t gcr.io/projet-z1/GKE-cicd-terraform-hello:${{ github.sha }} .
-        docker push gcr.io/projet-z1/GKE-cicd-terraform-hello:${{ github.sha }}
+        docker build -t gcr.io/projet-z1/gke-cicd-terraform-hello:${{ github.sha }} .
+        docker push gcr.io/projet-z1/gke-cicd-terraform-hello:${{ github.sha }}
     
     - name: Deploy to GKE
       run: |

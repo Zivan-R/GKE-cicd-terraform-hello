@@ -12,7 +12,7 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: gcr.io/projet-z1/GKE-cicd-terraform-hello:${GITHUB_SHA}
+        image: gcr.io/projet-z1/gke-cicd-terraform-hello:${GITHUB_SHA}
         ports: [{ containerPort: 80 }]
 
 ---
