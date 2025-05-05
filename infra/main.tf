@@ -17,4 +17,5 @@ resource "google_container_cluster" "primary" {
     node_config { 
         machine_type = "e2-medium"
     }
+    deletion_protection = false
 }
